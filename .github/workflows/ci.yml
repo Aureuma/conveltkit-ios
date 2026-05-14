@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ["*"]
+
+jobs:
+  swift:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Swift Package Describe
+        run: swift package describe
+
+      - name: Swift Build
+        run: swift build
+
+      - name: Swift Test
+        run: swift test
+
+      - name: Swift Release Build
+        run: swift build -c release
+
+      - name: iOS Generic Build
+        run: xcodebuild -scheme ConveltKit-Package -destination 'generic/platform=iOS' build
+
