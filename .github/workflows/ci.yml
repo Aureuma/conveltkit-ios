@@ -26,5 +26,4 @@ jobs:
         run: swift build -c release
 
       - name: iOS Generic Build
-        run: xcodebuild -scheme ConveltKit-Package -destination 'generic/platform=iOS' build
-
+        run: xcodebuild -scheme ConveltKit -destination 'generic/platform=iOS' build
