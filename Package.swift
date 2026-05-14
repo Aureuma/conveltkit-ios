@@ -5,7 +5,7 @@ let package = Package(
     name: "ConveltKit",
     platforms: [
         .iOS(.v17),
-        .macOS(.v12),
+        .macOS(.v13),
     ],
     products: [
         .library(

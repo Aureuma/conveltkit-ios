@@ -5,7 +5,7 @@ Public Swift Package for Convelt iOS billing and entitlement integration.
 ## Requirements
 
 - iOS 17+
-- macOS 12+
+- macOS 13+
 - Swift tools 5.10+
 
 ## Installation
@@ -47,4 +47,3 @@ let client = ConveltClient(configuration: config)
 ## Versioning
 
 Semantic versions are published as Git tags and GitHub releases.
-

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.105 - 2026-05-14
+
+- Raise macOS deployment target to 13 to match StoreKit API availability used by `ConveltClient`.
+- Keep iOS target at 17+.
+
 ## 0.1.104 - 2026-05-14
 
 - Initial public extraction of ConveltKit Swift Package.
@@ -8,4 +13,3 @@
   - `Sources/ConveltKit`
   - `Tests/ConveltKitTests`
 - Added public docs and CI workflow.
-

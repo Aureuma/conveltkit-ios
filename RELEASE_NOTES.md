@@ -1,18 +1,7 @@
-# ConveltKit 0.1.104
+# ConveltKit 0.1.105
 
-Initial public release of the ConveltKit Swift Package.
+Patch release after the initial public extraction.
 
-- Source extracted from `Aureuma/convelt` commit `7e33a098470e322a304014c895b66051c28fbb45`.
-- Public package URL: `https://github.com/Aureuma/ConveltKit.git`
-- Product/module: `ConveltKit`
-- Minimum platforms:
-  - iOS 17+
-  - macOS 12+
-
-Compatibility-sensitive public API in this release includes:
-
-- `ConveltOutcomeResponse.failureReason`
-- `ConveltOutcomeResponse.resolvedOutcome`
-- `ConveltClientError.httpStatus(Int, String?)`
-- `ConveltClientError.decodeFailed`
-
+- Raise macOS deployment target to 13 to align with StoreKit API availability used in the SDK.
+- Preserve iOS deployment target at 17+.
+- No breaking API changes from `0.1.104`.
