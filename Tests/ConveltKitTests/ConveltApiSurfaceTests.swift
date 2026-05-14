@@ -50,5 +50,5 @@ import Foundation
 
 @Test func fileOutboxDefaultURLCompiles() async throws {
     let url = FileConveltOutboxStore.defaultURL()
-    #expect(url.lastPathComponent == "convelt-outbox.json")
+    #expect(url.lastPathComponent == "transaction-outbox.json")
 }

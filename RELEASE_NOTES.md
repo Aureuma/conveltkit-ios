@@ -1,6 +1,6 @@
-# ConveltKit 0.1.106
+# ConveltKit 0.1.107
 
-Patch release to fix SDK test-surface validation.
+Patch release to align API-surface test expectation with current SDK behavior.
 
-- Fix public API compile test to match `FileConveltOutboxStore.defaultURL(appGroupIdentifier:)`.
+- Update `fileOutboxDefaultURLCompiles` expectation to `transaction-outbox.json`.
 - No runtime API shape change.

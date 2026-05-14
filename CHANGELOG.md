@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.107 - 2026-05-14
+
+- Fix `fileOutboxDefaultURLCompiles` test expectation to match current default filename (`transaction-outbox.json`).
+
 ## 0.1.106 - 2026-05-14
 
 - Fix API-surface compile test to match `FileConveltOutboxStore.defaultURL(appGroupIdentifier:)`.
