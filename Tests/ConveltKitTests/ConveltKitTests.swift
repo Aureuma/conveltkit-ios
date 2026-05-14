@@ -183,3 +183,44 @@ import Foundation
         Issue.record("unexpected error type: \(error)")
     }
 }
+
+@Test func stableStoreKitUploadIdempotencyKeyIsDeterministic() {
+    let appEnvironmentID = UUID(uuidString: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")!
+    let first = ConveltClient.stableStoreKitUploadIdempotencyKey(
+        appEnvironmentID: appEnvironmentID,
+        originalTransactionID: "2000001234567890",
+        transactionID: "2000001234567891",
+        productID: "ai.lingospeak.pro.monthly"
+    )
+    let second = ConveltClient.stableStoreKitUploadIdempotencyKey(
+        appEnvironmentID: appEnvironmentID,
+        originalTransactionID: "2000001234567890",
+        transactionID: "2000001234567891",
+        productID: "ai.lingospeak.pro.monthly"
+    )
+    #expect(first == second)
+}
+
+@Test func stableStoreKitUploadIdempotencyKeyChangesWhenTransactionIdentityChanges() {
+    let appEnvironmentID = UUID(uuidString: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")!
+    let baseline = ConveltClient.stableStoreKitUploadIdempotencyKey(
+        appEnvironmentID: appEnvironmentID,
+        originalTransactionID: "2000001234567890",
+        transactionID: "2000001234567891",
+        productID: "ai.lingospeak.pro.monthly"
+    )
+    let differentTransaction = ConveltClient.stableStoreKitUploadIdempotencyKey(
+        appEnvironmentID: appEnvironmentID,
+        originalTransactionID: "2000001234567890",
+        transactionID: "2000001234567892",
+        productID: "ai.lingospeak.pro.monthly"
+    )
+    let differentProduct = ConveltClient.stableStoreKitUploadIdempotencyKey(
+        appEnvironmentID: appEnvironmentID,
+        originalTransactionID: "2000001234567890",
+        transactionID: "2000001234567891",
+        productID: "ai.lingospeak.pro.annual"
+    )
+    #expect(baseline != differentTransaction)
+    #expect(baseline != differentProduct)
+}

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.110 - 2026-05-14
+
+- Derive deterministic StoreKit transaction upload idempotency keys from app environment ID, original transaction ID, transaction ID, and product ID.
+- Apply stable idempotency for purchase success, restore-current-entitlements, and transaction-updates observer flows.
+- Add SDK tests that prove deterministic key reuse for the same transaction identity and uniqueness when transaction/product identity differs.
+
 ## 0.1.109 - 2026-05-14
 
 - Add `ConveltClient.bindAuthorizationBearerToken(_:)` and forward `Authorization: Bearer ...` on client API requests when present.

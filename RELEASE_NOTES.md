@@ -1,7 +1,7 @@
-# ConveltKit 0.1.109
+# ConveltKit 0.1.110
 
-Patch release to add authenticated proxy support for Lingospeak's Convelt client routes.
+Patch release to stabilize StoreKit transaction upload idempotency.
 
-- Add `ConveltClient.bindAuthorizationBearerToken(_:)`.
-- Include `Authorization: Bearer <token>` on Convelt client API requests when bound.
-- Keeps existing API behavior unchanged when no token is bound.
+- Add deterministic idempotency key derivation for verified StoreKit transactions based on app environment, original transaction ID, transaction ID, and product ID.
+- Use stable keys across purchase success, restore-current-entitlements, and transaction-updates observer upload paths.
+- Add regression tests covering deterministic key reuse and identity-based key differentiation.

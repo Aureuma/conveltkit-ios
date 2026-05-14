@@ -599,6 +599,7 @@ public actor ConveltClient {
         appAccountToken: UUID,
         idempotencyKey: String = UUID().uuidString
     ) async throws -> ConveltOutcomeResponse {
+        _ = idempotencyKey
         let purchaseResult: Product.PurchaseResult
         do {
             purchaseResult = try await product.purchase(options: [.appAccountToken(appAccountToken)])
@@ -621,8 +622,7 @@ public actor ConveltClient {
                     installationID: installationID,
                     customerID: customerID,
                     externalUserID: externalUserID,
-                    appAccountToken: appAccountToken,
-                    idempotencyKey: idempotencyKey
+                    appAccountToken: appAccountToken
                 )
             } catch let error as ConveltClientError {
                 return Self.outcomeForClientError(error)
@@ -670,8 +670,7 @@ public actor ConveltClient {
                 installationID: installationID,
                 customerID: customerID,
                 externalUserID: externalUserID,
-                appAccountToken: appAccountToken,
-                idempotencyKey: UUID().uuidString
+                appAccountToken: appAccountToken
             )
             outcome = Self.preferredRestoreOutcome(current: outcome, candidate: candidate)
         }
@@ -711,8 +710,7 @@ public actor ConveltClient {
                         installationID: installationID,
                         customerID: customerID,
                         externalUserID: externalUserID,
-                        appAccountToken: appAccountToken,
-                        idempotencyKey: UUID().uuidString
+                        appAccountToken: appAccountToken
                     )
                     onOutcome(.success(outcome))
                 } catch {
@@ -739,8 +737,7 @@ public actor ConveltClient {
                         installationID: installationID,
                         customerID: identity.customerID,
                         externalUserID: identity.externalUserID,
-                        appAccountToken: identity.appAccountToken,
-                        idempotencyKey: UUID().uuidString
+                        appAccountToken: identity.appAccountToken
                     )
                     onOutcome(.success(outcome))
                 } catch {
@@ -756,9 +753,14 @@ public actor ConveltClient {
         installationID: UUID,
         customerID: UUID,
         externalUserID: String?,
-        appAccountToken: UUID,
-        idempotencyKey: String
+        appAccountToken: UUID
     ) async throws -> ConveltOutcomeResponse {
+        let idempotencyKey = Self.stableStoreKitUploadIdempotencyKey(
+            appEnvironmentID: configuration.appEnvironmentID,
+            originalTransactionID: String(transaction.originalID),
+            transactionID: String(transaction.id),
+            productID: transaction.productID
+        )
         let upload = ConveltAppleTransactionUpload(
             installationID: installationID,
             customerID: customerID,
@@ -779,6 +781,27 @@ public actor ConveltClient {
             await transaction.finish()
         }
         return latest
+    }
+
+    static func stableStoreKitUploadIdempotencyKey(
+        appEnvironmentID: UUID,
+        originalTransactionID: String,
+        transactionID: String,
+        productID: String
+    ) -> String {
+        let normalizedOriginalTransactionID = originalTransactionID.trimmingCharacters(in: .whitespacesAndNewlines)
+        let normalizedTransactionID = transactionID.trimmingCharacters(in: .whitespacesAndNewlines)
+        let normalizedProductID = productID.trimmingCharacters(in: .whitespacesAndNewlines)
+        let raw = [
+            "apple_tx",
+            appEnvironmentID.uuidString.lowercased(),
+            normalizedOriginalTransactionID,
+            normalizedTransactionID,
+            normalizedProductID
+        ].joined(separator: ":")
+        let digest = SHA256.hash(data: Data(raw.utf8))
+        let hex = digest.map { String(format: "%02x", $0) }.joined()
+        return "apple-tx-\(hex)"
     }
 
     private func verifiedTransaction(
