@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.106 - 2026-05-14
+
+- Fix API-surface compile test to match `FileConveltOutboxStore.defaultURL(appGroupIdentifier:)`.
+
 ## 0.1.105 - 2026-05-14
 
 - Raise macOS deployment target to 13 to match StoreKit API availability used by `ConveltClient`.

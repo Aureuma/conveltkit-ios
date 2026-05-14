@@ -1,7 +1,6 @@
-# ConveltKit 0.1.105
+# ConveltKit 0.1.106
 
-Patch release after the initial public extraction.
+Patch release to fix SDK test-surface validation.
 
-- Raise macOS deployment target to 13 to align with StoreKit API availability used in the SDK.
-- Preserve iOS deployment target at 17+.
-- No breaking API changes from `0.1.104`.
+- Fix public API compile test to match `FileConveltOutboxStore.defaultURL(appGroupIdentifier:)`.
+- No runtime API shape change.

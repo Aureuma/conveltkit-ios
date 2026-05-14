@@ -49,7 +49,6 @@ import Foundation
 }
 
 @Test func fileOutboxDefaultURLCompiles() async throws {
-    let url = FileConveltOutboxStore.defaultURL(appCode: "lingospeak")
+    let url = FileConveltOutboxStore.defaultURL()
     #expect(url.lastPathComponent == "convelt-outbox.json")
 }
-
