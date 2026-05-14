@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.108 - 2026-05-14
+
+- Normalize migration/docs references to the canonical public repository name `Aureuma/ConveltKit`.
+- Update LingoSpeak migration example pin to `0.1.107`.
+
 ## 0.1.107 - 2026-05-14
 
 - Fix `fileOutboxDefaultURLCompiles` test expectation to match current default filename (`transaction-outbox.json`).
@@ -16,7 +21,7 @@
 ## 0.1.104 - 2026-05-14
 
 - Initial public extraction of ConveltKit Swift Package.
-- Source extracted from `Aureuma/convelt` at commit `7e33a098470e322a304014c895b66051c28fbb45`.
+- Source extracted from the internal Convelt monorepo at commit `7e33a098470e322a304014c895b66051c28fbb45`.
 - Standardized SwiftPM layout:
   - `Sources/ConveltKit`
   - `Tests/ConveltKitTests`
