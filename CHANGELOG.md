@@ -1,9 +1,14 @@
 # Changelog
 
+## 0.1.109 - 2026-05-14
+
+- Add `ConveltClient.bindAuthorizationBearerToken(_:)` and forward `Authorization: Bearer ...` on client API requests when present.
+- Enables authenticated Lingospeak proxy routes (`/v1/client/entitlements/*`, `/v1/client/apple/transactions`) to avoid 401 unauthorized responses.
+
 ## 0.1.108 - 2026-05-14
 
 - Normalize migration/docs references to the canonical public repository name `Aureuma/ConveltKit`.
-- Update LingoSpeak migration example pin to `0.1.107`.
+- Update LingoSpeak migration example pin to `0.1.108`.
 
 ## 0.1.107 - 2026-05-14
 

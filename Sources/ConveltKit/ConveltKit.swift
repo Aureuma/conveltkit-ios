@@ -352,6 +352,7 @@ public actor ConveltClient {
     private let outboxStore: any ConveltOutboxStore
     private var latestSnapshotByCustomerID: [UUID: ConveltEntitlementSnapshot] = [:]
     private var boundExternalUserID: String?
+    private var authorizationBearerToken: String?
     private var pendingUploads: [ConveltPendingTransactionUpload] = []
     private var outboxLoaded = false
 
@@ -365,6 +366,11 @@ public actor ConveltClient {
 
     public func bindSignedInUser(externalUserID: String?) {
         boundExternalUserID = externalUserID?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    public func bindAuthorizationBearerToken(_ token: String?) {
+        let normalized = token?.trimmingCharacters(in: .whitespacesAndNewlines)
+        authorizationBearerToken = normalized?.isEmpty == false ? normalized : nil
     }
 
     public func bootstrap(installationID: UUID) async throws -> ConveltBootstrapResponse {
@@ -822,6 +828,9 @@ public actor ConveltClient {
         request.httpMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(configuration.publicSDKKey, forHTTPHeaderField: "x-convelt-sdk-key")
+        if let authorizationBearerToken {
+            request.setValue("Bearer \(authorizationBearerToken)", forHTTPHeaderField: "Authorization")
+        }
         if let idempotencyKey {
             request.setValue(idempotencyKey, forHTTPHeaderField: "Idempotency-Key")
         }
