@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.111 - 2026-05-15
+
+- Make `ConveltClient.stableStoreKitUploadIdempotencyKey(...)` public so host apps can deterministically generate upload idempotency keys when integrating StoreKit transaction flows.
+
 ## 0.1.110 - 2026-05-14
 
 - Derive deterministic StoreKit transaction upload idempotency keys from app environment ID, original transaction ID, transaction ID, and product ID.

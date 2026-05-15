@@ -783,7 +783,7 @@ public actor ConveltClient {
         return latest
     }
 
-    static func stableStoreKitUploadIdempotencyKey(
+    public static func stableStoreKitUploadIdempotencyKey(
         appEnvironmentID: UUID,
         originalTransactionID: String,
         transactionID: String,
