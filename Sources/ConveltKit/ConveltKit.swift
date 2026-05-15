@@ -181,6 +181,24 @@ public actor ConveltUserIdentityResolver {
         return ConveltUserIdentity(externalUserID: externalUserID, customerID: created)
     }
 
+    @discardableResult
+    public func adoptCanonicalCustomerID(
+        externalUserID rawExternalUserID: String,
+        customerID: UUID
+    ) throws -> Bool {
+        let externalUserID = rawExternalUserID.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !externalUserID.isEmpty else {
+            throw ConveltClientError.userIdentityUnavailable
+        }
+        let key = keyPrefix + externalUserID
+        let existing = defaults.string(forKey: key)
+        if existing == customerID.uuidString {
+            return false
+        }
+        defaults.set(customerID.uuidString, forKey: key)
+        return true
+    }
+
     public nonisolated static func deterministicCustomerID(
         externalUserID: String,
         salt: String
@@ -439,8 +457,24 @@ public actor ConveltClient {
                 outcomes.append(outcome)
                 if outcome.retryable && !outcome.readyToFinish {
                     remaining.append(pending)
+                    if index + 1 < pendingUploads.count {
+                        remaining.append(contentsOf: pendingUploads[(index + 1)...])
+                    }
+                    break
                 }
             } catch {
+                if let clientError = error as? ConveltClientError {
+                    let outcome = Self.outcomeForClientError(clientError)
+                    outcomes.append(outcome)
+                    if outcome.retryable && !outcome.readyToFinish {
+                        remaining.append(pending)
+                        if index + 1 < pendingUploads.count {
+                            remaining.append(contentsOf: pendingUploads[(index + 1)...])
+                        }
+                        break
+                    }
+                    continue
+                }
                 remaining.append(pending)
                 if index + 1 < pendingUploads.count {
                     remaining.append(contentsOf: pendingUploads[(index + 1)...])

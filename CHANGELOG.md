@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.112 - 2026-05-15
+
+- Add `ConveltUserIdentityResolver.adoptCanonicalCustomerID(...)` so host apps can persist server-canonical customer aliases.
+- Improve outbox draining to classify client HTTP failures into explicit outcomes and avoid collapsing known conflicts into generic retry-only behavior.
+
 ## 0.1.111 - 2026-05-15
 
 - Make `ConveltClient.stableStoreKitUploadIdempotencyKey(...)` public so host apps can deterministically generate upload idempotency keys when integrating StoreKit transaction flows.

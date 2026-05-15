@@ -70,6 +70,39 @@ import Foundation
     #expect(first.appAccountToken == first.customerID)
 }
 
+@Test func userIdentityResolverAdoptsCanonicalCustomerID() async throws {
+    let suiteName = "convelt-tests-\(UUID().uuidString)"
+    let defaults = UserDefaults(suiteName: suiteName)!
+    defer {
+        defaults.removePersistentDomain(forName: suiteName)
+    }
+
+    let resolver = ConveltUserIdentityResolver(
+        defaults: defaults,
+        keyPrefix: "convelt.test.customer.",
+        salt: "convelt.test.salt"
+    )
+
+    let before = try await resolver.resolve(externalUserID: "apple:user-1")
+    let canonical = UUID()
+    #expect(before.customerID != canonical)
+
+    let adopted = try await resolver.adoptCanonicalCustomerID(
+        externalUserID: " apple:user-1 ",
+        customerID: canonical
+    )
+    #expect(adopted)
+
+    let after = try await resolver.resolve(externalUserID: "apple:user-1")
+    #expect(after.customerID == canonical)
+
+    let adoptedAgain = try await resolver.adoptCanonicalCustomerID(
+        externalUserID: "apple:user-1",
+        customerID: canonical
+    )
+    #expect(!adoptedAgain)
+}
+
 @Test func fileOutboxStoreRoundTrip() async throws {
     let directory = FileManager.default.temporaryDirectory
         .appendingPathComponent(UUID().uuidString, isDirectory: true)

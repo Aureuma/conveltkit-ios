@@ -8,7 +8,7 @@ Update `apps/ios/LingoSpeak/project.yml` package reference from private monorepo
 packages:
   ConveltKit:
     url: https://github.com/Aureuma/ConveltKit.git
-    exactVersion: 0.1.111
+    exactVersion: 0.1.112
 ```
 
 Target dependency entry:
