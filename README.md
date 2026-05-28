@@ -25,12 +25,27 @@ let config = ConveltConfiguration(
     baseURL: URL(string: "https://api.example.com")!,
     publicSDKKey: "public-sdk-key",
     appEnvironmentID: UUID(),
-    bundleID: "ai.lingospeak.one",
+    appCode: "example-app",
+    bundleID: "com.example.app",
     appVersion: "1.0.0",
     buildNumber: "1"
 )
 
 let client = ConveltClient(configuration: config)
+```
+
+LingoSpeak-specific integrations should still pass explicit identity, for example:
+
+```swift
+let lingoSpeakConfig = ConveltConfiguration(
+    baseURL: URL(string: "https://api.lingospeak.ai")!,
+    publicSDKKey: "public-sdk-key",
+    appEnvironmentID: UUID(),
+    appCode: "lingospeak",
+    bundleID: "ai.lingospeak.one",
+    appVersion: "1.0.0",
+    buildNumber: "1"
+)
 ```
 
 ## API Notes

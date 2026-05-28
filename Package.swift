@@ -13,9 +13,15 @@ let package = Package(
             targets: ["ConveltKit"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-crypto.git", from: "3.0.0")
+    ],
     targets: [
         .target(
             name: "ConveltKit",
+            dependencies: [
+                .product(name: "Crypto", package: "swift-crypto")
+            ],
             path: "Sources/ConveltKit"
         ),
         .testTarget(

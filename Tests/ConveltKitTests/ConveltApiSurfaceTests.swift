@@ -2,6 +2,19 @@ import Testing
 @testable import ConveltKit
 import Foundation
 
+@Test func explicitAppIdentitySurfaceCompiles() async throws {
+    let config = ConveltConfiguration(
+        baseURL: URL(string: "https://example.com")!,
+        publicSDKKey: "key",
+        appEnvironmentID: UUID(),
+        appCode: "example-app",
+        bundleID: "com.example.app",
+        appVersion: "1.0.0",
+        buildNumber: "1"
+    )
+    let _ = ConveltClient(configuration: config)
+}
+
 @Test func publicOutcomeFailureReasonCompiles() async throws {
     let response = ConveltOutcomeResponse(
         outcome: "verification_failed_terminal",

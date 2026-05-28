@@ -1,8 +1,15 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 #if canImport(StoreKit)
 import StoreKit
 #endif
+#if canImport(CryptoKit)
 import CryptoKit
+#elseif canImport(Crypto)
+import Crypto
+#endif
 
 public enum ConveltEnvironment: String, Sendable, Codable {
     case sandbox
@@ -22,7 +29,7 @@ public struct ConveltConfiguration: Sendable {
         baseURL: URL,
         publicSDKKey: String,
         appEnvironmentID: UUID,
-        appCode: String = "lingospeak",
+        appCode: String,
         bundleID: String,
         appVersion: String,
         buildNumber: String
@@ -334,6 +341,7 @@ public actor FileConveltOutboxStore: ConveltOutboxStore {
 
     public static func defaultURL(appGroupIdentifier: String? = nil) -> URL {
         let baseDirectory: URL
+        #if canImport(Darwin)
         if let appGroupIdentifier,
            let groupURL = FileManager.default.containerURL(
                 forSecurityApplicationGroupIdentifier: appGroupIdentifier
@@ -345,6 +353,22 @@ public actor FileConveltOutboxStore: ConveltOutboxStore {
                 in: .userDomainMask
             ).first ?? FileManager.default.temporaryDirectory
         }
+        #else
+        _ = appGroupIdentifier
+        do {
+            baseDirectory = try FileManager.default.url(
+                for: .applicationSupportDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+            )
+        } catch {
+            baseDirectory = FileManager.default.urls(
+                for: .applicationSupportDirectory,
+                in: .userDomainMask
+            ).first ?? FileManager.default.temporaryDirectory
+        }
+        #endif
         return baseDirectory
             .appendingPathComponent("convelt", isDirectory: true)
             .appendingPathComponent("transaction-outbox.json", isDirectory: false)
@@ -858,6 +882,29 @@ public actor ConveltClient {
         default:
             return .sandbox
         }
+    }
+#endif
+
+#if !canImport(StoreKit)
+    public static func stableStoreKitUploadIdempotencyKey(
+        appEnvironmentID: UUID,
+        originalTransactionID: String,
+        transactionID: String,
+        productID: String
+    ) -> String {
+        let normalizedOriginalTransactionID = originalTransactionID.trimmingCharacters(in: .whitespacesAndNewlines)
+        let normalizedTransactionID = transactionID.trimmingCharacters(in: .whitespacesAndNewlines)
+        let normalizedProductID = productID.trimmingCharacters(in: .whitespacesAndNewlines)
+        let raw = [
+            "apple_tx",
+            appEnvironmentID.uuidString.lowercased(),
+            normalizedOriginalTransactionID,
+            normalizedTransactionID,
+            normalizedProductID
+        ].joined(separator: ":")
+        let digest = SHA256.hash(data: Data(raw.utf8))
+        let hex = digest.map { String(format: "%02x", $0) }.joined()
+        return "apple-tx-\(hex)"
     }
 #endif
 

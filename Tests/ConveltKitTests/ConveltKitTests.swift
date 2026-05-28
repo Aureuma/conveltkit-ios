@@ -7,7 +7,8 @@ import Foundation
         baseURL: URL(string: "https://example.com")!,
         publicSDKKey: "key",
         appEnvironmentID: UUID(),
-        bundleID: "ai.lingospeak.one",
+        appCode: "example-app",
+        bundleID: "com.example.app",
         appVersion: "1.0.0",
         buildNumber: "1"
     )
@@ -115,7 +116,7 @@ import Foundation
         externalUserID: "google:user-1",
         transactionID: "tx-1",
         originalTransactionID: "otx-1",
-        productID: "ai.lingospeak.pro.monthly",
+        productID: "com.example.app.pro.monthly",
         signedPayload: "signed",
         appAccountToken: UUID(),
         environment: .sandbox,
@@ -154,7 +155,7 @@ import Foundation
           "external_user_id": "google:user-1",
           "transaction_id": "tx-1",
           "original_transaction_id": "otx-1",
-          "product_id": "ai.lingospeak.pro.monthly",
+          "product_id": "com.example.app.pro.monthly",
           "signed_payload": "signed",
           "app_account_token": "33333333-3333-3333-3333-333333333333",
           "environment": "sandbox",
@@ -180,7 +181,8 @@ import Foundation
         baseURL: URL(string: "https://example.com")!,
         publicSDKKey: "key",
         appEnvironmentID: UUID(),
-        bundleID: "ai.lingospeak.one",
+        appCode: "example-app",
+        bundleID: "com.example.app",
         appVersion: "1.0.0",
         buildNumber: "1"
     )
@@ -196,7 +198,7 @@ import Foundation
         externalUserID: "google:user-2",
         transactionID: "tx-2",
         originalTransactionID: "otx-2",
-        productID: "ai.lingospeak.pro.monthly",
+        productID: "com.example.app.pro.monthly",
         signedPayload: "signed",
         appAccountToken: UUID(),
         environment: .sandbox,
@@ -223,13 +225,13 @@ import Foundation
         appEnvironmentID: appEnvironmentID,
         originalTransactionID: "2000001234567890",
         transactionID: "2000001234567891",
-        productID: "ai.lingospeak.pro.monthly"
+        productID: "com.example.app.pro.monthly"
     )
     let second = ConveltClient.stableStoreKitUploadIdempotencyKey(
         appEnvironmentID: appEnvironmentID,
         originalTransactionID: "2000001234567890",
         transactionID: "2000001234567891",
-        productID: "ai.lingospeak.pro.monthly"
+        productID: "com.example.app.pro.monthly"
     )
     #expect(first == second)
 }
@@ -240,19 +242,19 @@ import Foundation
         appEnvironmentID: appEnvironmentID,
         originalTransactionID: "2000001234567890",
         transactionID: "2000001234567891",
-        productID: "ai.lingospeak.pro.monthly"
+        productID: "com.example.app.pro.monthly"
     )
     let differentTransaction = ConveltClient.stableStoreKitUploadIdempotencyKey(
         appEnvironmentID: appEnvironmentID,
         originalTransactionID: "2000001234567890",
         transactionID: "2000001234567892",
-        productID: "ai.lingospeak.pro.monthly"
+        productID: "com.example.app.pro.monthly"
     )
     let differentProduct = ConveltClient.stableStoreKitUploadIdempotencyKey(
         appEnvironmentID: appEnvironmentID,
         originalTransactionID: "2000001234567890",
         transactionID: "2000001234567891",
-        productID: "ai.lingospeak.pro.annual"
+        productID: "com.example.app.pro.annual"
     )
     #expect(baseline != differentTransaction)
     #expect(baseline != differentProduct)
