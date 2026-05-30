@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.119 - 2026-05-30
+
+- Move canonical SDK repository references to `Aureuma/conveltkit-ios`.
+- Replace runtime workspace-version path walking with generated `ConveltKitVersion` metadata from Convelt.
+- Add bootstrap payload contract test coverage for `sdkVersion` and `supportedContractVersions`.
+
 ## 0.1.112 - 2026-05-15
 
 - Add `ConveltUserIdentityResolver.adoptCanonicalCustomerID(...)` so host apps can persist server-canonical customer aliases.
@@ -22,7 +28,7 @@
 
 ## 0.1.108 - 2026-05-14
 
-- Normalize migration/docs references to the canonical public repository name `Aureuma/ConveltKit`.
+- Normalize migration/docs references to the canonical public repository name `Aureuma/conveltkit-ios`.
 - Update LingoSpeak migration example pin to `0.1.108`.
 
 ## 0.1.107 - 2026-05-14

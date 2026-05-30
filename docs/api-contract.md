@@ -2,6 +2,13 @@
 
 This package is the public Swift SDK for Convelt client-side purchase and entitlement integration.
 
+## Contract source of truth
+
+Convelt contract source:
+
+- `https://github.com/Aureuma/convelt/blob/main/docs/api-contract.md`
+- `convelt/crates/convelt-core/src/contracts.rs`
+
 ## Key Public Surfaces
 
 - `ConveltConfiguration`
@@ -33,4 +40,3 @@ Public integration relies on:
 - `ConveltClientError.decodeFailed`
 
 These are compile-checked in tests and treated as compatibility-sensitive.
-

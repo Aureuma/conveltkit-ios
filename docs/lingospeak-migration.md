@@ -1,14 +1,14 @@
 # LingoSpeak Migration
 
-Update `apps/ios/LingoSpeak/project.yml` package reference from private monorepo revision pin to public package URL and exact semantic version.
+Update `apps/ios/LingoSpeak/project.yml` package reference to the platform repo URL and exact semantic version.
 
 ## Target Package Reference
 
 ```yaml
 packages:
   ConveltKit:
-    url: https://github.com/Aureuma/ConveltKit.git
-    exactVersion: 0.1.112
+    url: https://github.com/Aureuma/conveltkit-ios.git
+    exactVersion: 0.1.119
 ```
 
 Target dependency entry:
@@ -23,4 +23,4 @@ dependencies:
 
 - Regenerate iOS project with XcodeGen.
 - Resolve package dependencies.
-- Verify no remaining legacy private monorepo package URL in project sources.
+- Verify no remaining old SDK URL in project sources.

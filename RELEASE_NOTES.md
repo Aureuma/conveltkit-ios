@@ -1,6 +1,8 @@
-# ConveltKit 0.1.112
+# ConveltKit 0.1.119
 
-Patch release to improve customer alias reconciliation and outbox conflict handling.
+Platform split and version-authority alignment release.
 
-- Add `ConveltUserIdentityResolver.adoptCanonicalCustomerID(...)` so app targets can persist server-canonical customer IDs per external user.
-- Ensure outbox draining returns explicit terminal/retry outcomes for known client HTTP failures instead of silently falling back to generic retry-only behavior.
+- Canonical iOS SDK source URL is now `https://github.com/Aureuma/conveltkit-ios.git`.
+- Bootstrap now reports `sdkVersion` from generated `ConveltKitVersion` metadata.
+- Removed filesystem-based workspace version probing from SDK runtime code.
+- Added contract test coverage to verify bootstrap sends the generated SDK version and `supportedContractVersions: ["1.0.0"]`.

@@ -436,7 +436,7 @@ public actor ConveltClient {
             buildNumber: configuration.buildNumber,
             installationID: installationID,
             sdkKey: configuration.publicSDKKey,
-            sdkVersion: ConveltSDKBuildInfo.workspaceVersion,
+            sdkVersion: ConveltKitVersion.value,
             supportedContractVersions: ["1.0.0"]
         )
 
@@ -1122,44 +1122,6 @@ private extension JSONDecoder {
         decoder.dateDecodingStrategy = .iso8601
         return decoder
     }
-}
-
-private enum ConveltSDKBuildInfo {
-    static let workspaceVersion: String? = {
-        let fileURL = URL(fileURLWithPath: #filePath)
-        // ConveltKit.swift -> ConveltKit -> Sources -> ConveltKit -> swift -> sdks -> repo root
-        let repoRoot = fileURL
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-        let cargoURL = repoRoot.appendingPathComponent("Cargo.toml")
-        guard let contents = try? String(contentsOf: cargoURL, encoding: .utf8) else {
-            return nil
-        }
-        var inWorkspacePackage = false
-        for rawLine in contents.split(whereSeparator: \.isNewline) {
-            let line = rawLine.trimmingCharacters(in: .whitespaces)
-            if line.hasPrefix("[") {
-                inWorkspacePackage = (line == "[workspace.package]")
-                continue
-            }
-            guard inWorkspacePackage, line.hasPrefix("version") else {
-                continue
-            }
-            guard let equals = line.firstIndex(of: "=") else {
-                continue
-            }
-            let rawValue = line[line.index(after: equals)...]
-            let trimmed = rawValue.trimmingCharacters(in: .whitespaces)
-            if trimmed.hasPrefix("\""), trimmed.hasSuffix("\""), trimmed.count >= 2 {
-                return String(trimmed.dropFirst().dropLast())
-            }
-        }
-        return nil
-    }()
 }
 
 private struct AnyCodingKey: CodingKey {

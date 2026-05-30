@@ -12,7 +12,7 @@ Public Swift Package for Convelt iOS billing and entitlement integration.
 
 Xcode Swift Package dependency:
 
-- URL: `https://github.com/Aureuma/ConveltKit.git`
+- URL: `https://github.com/Aureuma/conveltkit-ios.git`
 - Version: exact pin recommended for release builds
 
 ## Quick Start
@@ -53,6 +53,12 @@ let lingoSpeakConfig = ConveltConfiguration(
 - `ConveltOutcomeResponse.failureReason` is part of the public contract.
 - `ConveltClientError.httpStatus(Int, String?)` and `ConveltClientError.decodeFailed` are stable public error surfaces used by app integrations.
 - StoreKit helpers are guarded with `#if canImport(StoreKit)`.
+
+## Contract and version source of truth
+
+- Contract semantics are defined in Convelt: `https://github.com/Aureuma/convelt/blob/main/docs/api-contract.md`
+- Product version source of truth is `convelt/Cargo.toml` `[workspace.package].version`
+- `ConveltKitVersion.swift` is generated from Convelt and should not be edited as source of truth.
 
 ## Security Boundary
 
