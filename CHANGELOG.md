@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.125 - 2026-05-31
+
+- Sync generated SDK version metadata with Convelt `0.1.125`.
+- Keep SDK docs aligned after Convelt removed the historical entitlement import worker command.
+
 ## 0.1.124 - 2026-05-31
 
 - Sync generated SDK version metadata with Convelt `0.1.124`.
