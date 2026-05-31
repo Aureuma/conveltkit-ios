@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.122 - 2026-05-31
+
+- Sync generated SDK version metadata with Convelt `0.1.122`.
+- Refresh LingoSpeak migration docs to the current exact SwiftPM version.
+
 ## 0.1.119 - 2026-05-30
 
 - Move canonical SDK repository references to `Aureuma/conveltkit-ios`.

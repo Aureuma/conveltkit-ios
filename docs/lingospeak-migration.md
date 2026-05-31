@@ -8,7 +8,7 @@ Update `apps/ios/LingoSpeak/project.yml` package reference to the platform repo 
 packages:
   ConveltKit:
     url: https://github.com/Aureuma/conveltkit-ios.git
-    exactVersion: 0.1.119
+    exactVersion: 0.1.122
 ```
 
 Target dependency entry:
