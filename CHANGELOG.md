@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.126 - 2026-05-31
+
+- Sync generated SDK version metadata with Convelt `0.1.126`.
+- Keep the SDK train aligned after Convelt removed the raw-request idempotency compatibility branch.
+
 ## 0.1.125 - 2026-05-31
 
 - Sync generated SDK version metadata with Convelt `0.1.125`.
