@@ -1,7 +1,7 @@
-# ConveltKit 0.1.122
+# ConveltKit 0.1.123
 
-Shared ConveltKit train alignment release.
+Deny-closed integration cleanup release.
 
-- Generated SDK version metadata now reports `0.1.122` from Convelt.
-- LingoSpeak migration docs point at the canonical `conveltkit-ios` repository and exact version `0.1.122`.
+- Generated SDK version metadata now reports `0.1.123` from Convelt.
+- Convelt/LingoSpeak integration docs no longer include the removed degraded fallback policy.
 - Bootstrap contract remains `supportedContractVersions: ["1.0.0"]`.

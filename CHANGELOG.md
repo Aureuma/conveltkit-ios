@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.123 - 2026-05-31
+
+- Sync generated SDK version metadata with Convelt `0.1.123`.
+- Keep LingoSpeak integration docs deny-closed by removing the old degraded fallback env policy.
+
 ## 0.1.122 - 2026-05-31
 
 - Sync generated SDK version metadata with Convelt `0.1.122`.
