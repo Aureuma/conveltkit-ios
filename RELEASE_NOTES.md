@@ -1,7 +1,7 @@
-# ConveltKit 0.1.123
+# ConveltKit 0.1.124
 
-Deny-closed integration cleanup release.
+Documentation freshness and version-sync release.
 
-- Generated SDK version metadata now reports `0.1.123` from Convelt.
-- Convelt/LingoSpeak integration docs no longer include the removed degraded fallback policy.
+- Generated SDK version metadata now reports `0.1.124` from Convelt.
+- LingoSpeak migration docs point at the current exact SwiftPM version.
 - Bootstrap contract remains `supportedContractVersions: ["1.0.0"]`.
