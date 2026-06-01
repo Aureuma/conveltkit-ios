@@ -1,8 +1,8 @@
-# ConveltKit 0.1.127
+# ConveltKit 0.1.128
 
-SDK documentation simplification and version-sync release.
+Runtime observability simplification and version-sync release.
 
-- Generated SDK version metadata now reports `0.1.127` from Convelt.
-- Host app SwiftPM pins are owned by the host app repo, not duplicated in a
-  LingoSpeak-specific SDK migration document.
+- Generated SDK version metadata now reports `0.1.128` from Convelt.
+- Convelt runtime observability uses Cargo package metadata for its version
+  dimension instead of runtime version fallback configuration.
 - Bootstrap contract remains `supportedContractVersions: ["1.0.0"]`.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.128 - 2026-05-31
+
+- Sync generated SDK version metadata with Convelt `0.1.128`.
+- Keep the SDK train aligned after Convelt removed runtime observability
+  version fallback configuration in favor of Cargo package metadata.
+
 ## 0.1.127 - 2026-05-31
 
 - Sync generated SDK version metadata with Convelt `0.1.127`.
