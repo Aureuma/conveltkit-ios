@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.129 - 2026-06-01
+
+- Sync generated SDK version metadata with Convelt `0.1.129`.
+- Make `ConveltClient` accept an injected `URLSession` so SDK contract tests use
+  an explicit ephemeral session instead of process-global URL protocol state.
+
 ## 0.1.128 - 2026-05-31
 
 - Sync generated SDK version metadata with Convelt `0.1.128`.

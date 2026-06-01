@@ -1,8 +1,8 @@
-# ConveltKit 0.1.128
+# ConveltKit 0.1.129
 
-Runtime observability simplification and version-sync release.
+Deterministic SDK contract test release.
 
-- Generated SDK version metadata now reports `0.1.128` from Convelt.
-- Convelt runtime observability uses Cargo package metadata for its version
-  dimension instead of runtime version fallback configuration.
+- Generated SDK version metadata now reports `0.1.129` from Convelt.
+- `ConveltClient` accepts an injected `URLSession` for deterministic contract
+  tests and host-controlled transport configuration.
 - Bootstrap contract remains `supportedContractVersions: ["1.0.0"]`.

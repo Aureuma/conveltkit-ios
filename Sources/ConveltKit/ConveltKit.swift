@@ -392,6 +392,7 @@ public actor InMemoryConveltOutboxStore: ConveltOutboxStore {
 public actor ConveltClient {
     private let configuration: ConveltConfiguration
     private let outboxStore: any ConveltOutboxStore
+    private let urlSession: URLSession
     private var latestSnapshotByCustomerID: [UUID: ConveltEntitlementSnapshot] = [:]
     private var boundExternalUserID: String?
     private var authorizationBearerToken: String?
@@ -400,10 +401,12 @@ public actor ConveltClient {
 
     public init(
         configuration: ConveltConfiguration,
-        outboxStore: any ConveltOutboxStore = InMemoryConveltOutboxStore()
+        outboxStore: any ConveltOutboxStore = InMemoryConveltOutboxStore(),
+        urlSession: URLSession = .shared
     ) {
         self.configuration = configuration
         self.outboxStore = outboxStore
+        self.urlSession = urlSession
     }
 
     public func bindSignedInUser(externalUserID: String?) {
@@ -943,7 +946,7 @@ public actor ConveltClient {
             request.httpBody = try JSONEncoder.convelt.encode(body)
         }
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await urlSession.data(for: request)
         guard let http = response as? HTTPURLResponse else {
             throw ConveltClientError.invalidResponse
         }
