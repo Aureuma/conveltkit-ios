@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.127 - 2026-05-31
+
+- Sync generated SDK version metadata with Convelt `0.1.127`.
+- Remove the LingoSpeak-specific migration doc so host app pins are owned by
+  the app repo and generated SDK metadata remains the only train version copy.
+
 ## 0.1.126 - 2026-05-31
 
 - Sync generated SDK version metadata with Convelt `0.1.126`.

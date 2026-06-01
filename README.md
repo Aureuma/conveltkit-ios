@@ -13,7 +13,7 @@ Public Swift Package for Convelt iOS billing and entitlement integration.
 Xcode Swift Package dependency:
 
 - URL: `https://github.com/Aureuma/conveltkit-ios.git`
-- Version: exact pin recommended for release builds
+- Version: exact Git tag pin recommended for release builds
 
 ## Quick Start
 
@@ -59,6 +59,9 @@ let lingoSpeakConfig = ConveltConfiguration(
 - Contract semantics are defined in Convelt: `https://github.com/Aureuma/convelt/blob/main/docs/api-contract.md`
 - Product version source of truth is `convelt/Cargo.toml` `[workspace.package].version`
 - `ConveltKitVersion.swift` is generated from Convelt and should not be edited as source of truth.
+- Host apps should pin a released `conveltkit-ios` tag directly in their own
+  package configuration. This SDK repo does not maintain app-specific migration
+  docs with duplicated exact-version values.
 
 ## Security Boundary
 
