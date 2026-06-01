@@ -2,5 +2,5 @@
 // Do not edit directly; source of truth is convelt/Cargo.toml [workspace.package].version.
 
 public enum ConveltKitVersion {
-    public static let value = "0.1.133"
+    public static let value = "0.1.134"
 }
