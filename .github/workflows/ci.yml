@@ -17,13 +17,13 @@ jobs:
         run: swift package describe
 
       - name: Swift Build
-        run: swift build
+        run: swift build -j 2
 
       - name: Swift Test
-        run: swift test
+        run: swift test -j 2
 
       - name: Swift Release Build
-        run: swift build -c release
+        run: swift build -j 2 -c release
 
       - name: iOS Generic Build
         run: xcodebuild -scheme ConveltKit -destination 'generic/platform=iOS' build
